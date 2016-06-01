@@ -12,14 +12,24 @@
 */
 
 Route::get('login', ['as'=>'login','uses'=>'loginController@index']);
+Route::post('login', ['uses'=>'loginController@postLogin']);
+
+// Route::post('login', function () {
+// 	return 'Usuario';
+// });
+
+// Route::resource("login","formController");
+
+
+
+
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test', function () {
-    return "holi";
-});
+
 Route::resource("formulario","formController");
 Route::get('formulario', ['as'=>'formulario','uses'=>"formController@index"]);
 

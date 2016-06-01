@@ -9,6 +9,14 @@ use App\Http\Controllers\Controller;
 
 class loginController extends Controller
 {
+
+
+    public function postLogin() 
+    {
+        return "Inicié sesion";
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +45,7 @@ class loginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return "store";
     }
 
     /**
