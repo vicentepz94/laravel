@@ -15,11 +15,11 @@
 
 			<div class="form-group">
 				<label for="nombre">Usuario:</label>
-				<input type="text"	class="form-control" placeholder="Nombre Usuario">
+				<input type="text"	class="form-control" name="usuario" placeholder="Nombre Usuario">
 			</div>
 			<div class="form-group">
 				<label for="contraseña">Contraseña:</label>
-				<input type="password" class="form-control" placeholder="Contraseña">
+				<input type="password" class="form-control" name="contraseña" placeholder="Contraseña">
 			</div>
 			<div class="form-group">
 

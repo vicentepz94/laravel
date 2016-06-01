@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Input;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -13,7 +13,9 @@ class loginController extends Controller
 
     public function postLogin() 
     {
-        return "Inicié sesion";
+        $usuario = Input::get('usuario');
+        return "El usuario ".$usuario." ha iniciado sesion!";
+        // return "Inicié sesion";
     }
 
 
