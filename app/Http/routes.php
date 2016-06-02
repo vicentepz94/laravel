@@ -11,8 +11,11 @@
 |
 */
 
-Route::get('login', ['as'=>'login','uses'=>'loginController@index']);
+Route::get('login', ['as'=>'login','uses'=>'loginController@getLogin']);
 Route::post('login', ['uses'=>'loginController@postLogin']);
+
+Route::get('registration', ['as' => 'registration', 'uses' => 'UsersController@create']);
+Route::post('registration', ['uses'=>'UsersController@store']);
 
 // Route::post('login', function () {
 // 	return 'Usuario';

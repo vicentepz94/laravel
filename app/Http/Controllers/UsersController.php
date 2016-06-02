@@ -2,40 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// incluir input y validator
 use Input;
-use HTML;
-use Auth;
-use App\Models\Teacher;
+use Validator;
 
-use App\Http\Requests;
+use App\Models\User;
+use App\Models\Login;
+
+use DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Http\RedirectResponse;
 
-class LoginController extends Controller
+
+
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getLogin()
+    public function index()
     {
-        return view('login.index');
-    }
-
-    public function postLogin()
-    {
-        //Guardo las credenciales del form de inicio de sesión.
-        $credentials = Input::only('username', 'password');
-         
-        //Acá pregunto, si esta registrado en mi base de datos, pasa
-        if (Auth::attempt($credentials)) {  
-
-                return "Estoy registrado!";
-
-        }
-        //Sino! 
-        return "No estoy registrado )= ";
+        return view('dashboard.index');
     }
 
     /**
@@ -45,7 +35,7 @@ class LoginController extends Controller
      */
     public function create()
     {
-        //
+        return view('registration.index');
     }
 
     /**
@@ -54,9 +44,32 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        //
+        //Cuando pulsas el botón de registrarse, primero, dejamos un validador de datos. mientras puedes dejarlo opcional.
+        $validator = Validator::make(Request::all(), 
+        [
+            'username' => 'required|max:100',
+            'password' => 'required|min:6'
+        ]);
+        //Preguntamos si el validador falla.
+        if ($validator->fails()) 
+        {
+            return "Los datos ingresados fallan";
+        }
+        //Si los datos están buenos
+        //Los guardamos.
+        
+        \App\User::create([
+            'name'=> $request["username"],
+            'password'=> bcrypt($request["password"]),
+            ]);
+
+        return "Los datos serán guardados";
+
+        //Tu tarea acá, será investigar cómo guardar los datos en la base de datos que configures.
+        
     }
 
     /**
@@ -78,7 +91,7 @@ class LoginController extends Controller
      */
     public function edit($id)
     {
-        //
+        return "Edit";
     }
 
     /**

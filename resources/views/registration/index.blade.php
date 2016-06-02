@@ -9,10 +9,8 @@
 	<body>
 
 		<div class='panel-body'>
-		{!! Form::open(['route' => 'login' , 'method' => 'POST' ]) !!}
+		{!! Form::open(['route' => 'registration' , 'method' => 'POST' ]) !!}
 		
-	
-
 			<div class="form-group">
 				<label for="nombre">Usuario:</label>
 				  {!! Form::text('username', null, ['class' => 'form-control', 'placeholder' => 'Nombre de usuario' ]) !!}	
@@ -24,9 +22,9 @@
 			<div class="form-group">
 
 
-			{!! Form::submit('Iniciar sesión', ['class' => 'btn-submit']) !!}
+			{!! Form::submit('Crear cuenta', ['class' => 'btn-submit']) !!}
 			</div>
-			<a href="registration">Click here</a>
+			<a href="login">Click here</a>
 		{!! Form::close() !!}
 </body>
 </html>
