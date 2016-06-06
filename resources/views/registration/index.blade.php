@@ -21,10 +21,9 @@
 			</div>
 			<div class="form-group">
 
-
 			{!! Form::submit('Crear cuenta', ['class' => 'btn-submit']) !!}
 			</div>
-			<a href="login">Click here</a>
+			<a href="login">Click here</a>		<a href="list">Listar</a>
 		{!! Form::close() !!}
 </body>
 </html>

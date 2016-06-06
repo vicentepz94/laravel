@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 // incluir input y validator
@@ -25,7 +24,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index');
+        $user = User::all();
+        return view('registration.list' ,compact('user'));
     }
 
     /**
@@ -58,18 +58,18 @@ class UsersController extends Controller
         {
             return "Los datos ingresados fallan";
         }
+        $user = new User(Request::all());
+        $user->username = Input::get('username');
         //Si los datos están buenos
         //Los guardamos.
-        
-        \App\User::create([
-            'name'=> $request["username"],
-            'password'=> bcrypt($request["password"]),
-            ]);
 
-        return "Los datos serán guardados";
-
-        //Tu tarea acá, será investigar cómo guardar los datos en la base de datos que configures.
-        
+        //Para guardar el password, se debe, o se recomienda encriptarlo, y para laravel 5.1 se encripta así :
+        $user->password = bcrypt(Input::get('password'));
+         //Guardamos el usuario.
+        $user->save();
+        //Si los datos están buenos
+        //Los guardamos.     
+        return redirect()->route('login');
     }
 
     /**
@@ -91,7 +91,14 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        return "Edit";
+
+        $user = User::find($id);
+        if (is_null($user))
+       {
+            return Redirect::route('registration.index');
+        }
+        //enviar info de la variable a la vista de registration/edit con compact('user')
+         return view('registration.edit',compact('user'));
     }
 
     /**
@@ -103,7 +110,18 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->username=Input::get('username');
+
+        $password =Input::get('password');
+        if($password!=null)
+        {
+            $user->password=Input::get('password');
+        }
+        
+        $user->update(); 
+        
+        return redirect('registration');      
     }
 
     /**
@@ -114,6 +132,10 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $u = User::find($id);
+
+        $u->delete();
+
+        return redirect('registration');
     }
 }

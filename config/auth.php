@@ -27,8 +27,8 @@ return [
     | is often just the "User" model but you may use whatever you like.
     |
     */
-
-    'model' => App\User::class,
+//INDICAR LA RUTA DE USER.PHP O EL MODELO A UTILIZAR
+    'model' => App\Models\User::class,
 
     /*
     |--------------------------------------------------------------------------
